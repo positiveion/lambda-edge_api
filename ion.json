@@ -1,0 +1,7 @@
+{
+  "proton": {
+    "REQUIRE_KNEX": "false",
+    "RESPONSE_TYPE": "app",
+    "ACCOUNT_NAME": "positiveion"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "name": "cxp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "i": "find * -mtime +10950 -exec touch {} \\;"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@awspilot/dynamodb": "^1.0.9",
+    "@positiveion/proton": "^1.0.23",
+    "aws-sdk-mock": "^2.0.0",
+    "bluebird": "^3.5.1",
+    "moment": "^2.19.3",
+    "numeral": "^2.0.6",
+    "chai": "^4.1.2",
+    "throw.js": "^3.0.1"
+  },
+  "devDependencies": {
+    "aws-sdk": "^2.169.0",
+    "cors": "^2.8.4",
+    "dotenv": "^4.0.0",
+    "mocha": "^5.1.1",
+    "nodemon": "^1.17.4"
+  }
+}
