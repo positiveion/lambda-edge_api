@@ -1,5 +1,5 @@
 {
-  "name": "cxp",
+  "name": "edge-api",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,14 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@awspilot/dynamodb": "^1.0.9",
-    "@positiveion/proton": "^1.0.23",
-    "aws-sdk-mock": "^2.0.0",
-    "bluebird": "^3.5.1",
-    "moment": "^2.19.3",
-    "numeral": "^2.0.6",
     "chai": "^4.1.2",
-    "throw.js": "^3.0.1"
+    "jwt-simple": "^0.5.1"
   },
   "devDependencies": {
     "aws-sdk": "^2.169.0",

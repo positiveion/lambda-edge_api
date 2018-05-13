@@ -1,7 +1,22 @@
 'use strict';
-var ServiceHelper = require("@positiveion/proton/service");
+const querystring = require('querystring');
+var url = require("url");
+var path = require("path");
 
-exports.handler = (event, context, callback) => {
-  context.callbackWaitsForEmptyEventLoop = false;
-  ServiceHelper(event, context, callback)
-};
+const AWS = require('aws-sdk');
+const S3 = new AWS.S3({
+  signatureVersion: 'v4',
+});
+
+exports.handler = async(event) => {
+  const request = event.Records[0].cf.request;
+  console.log(JSON.stringify(event));
+  console.log(request);
+  var authorization = request.headers.authorization || request.headers.authorization;
+  console.log(authorization);
+
+
+  request.uri = request.uri.replace("api/", "");
+  return request;
+
+}
