@@ -1,7 +1,7 @@
 {
   "proton": {
     "REQUIRE_KNEX": "false",
-    "RESPONSE_TYPE": "edge",
+    "RESPONSE_TYPE": "edge_view",
     "ACCOUNT_NAME": "positiveion"
   }
 }
