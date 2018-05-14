@@ -2,7 +2,7 @@
 const querystring = require('querystring');
 var url = require("url");
 var path = require("path");
-var JWT = require("@positiveion/proton/helpers/jwt");
+var DynamoDB = require('@awspilot/dynamodb')();
 
 const AWS = require('aws-sdk');
 const S3 = new AWS.S3({
