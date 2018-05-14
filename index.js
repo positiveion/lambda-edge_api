@@ -12,23 +12,18 @@ const S3 = new AWS.S3({
 
 exports.handler = async(event) => {
 
-  console.log(JSON.stringify(event));
   const request = event.Records[0].cf.request;
-  console.log(JSON.stringify(request));
 
   var account = getAccountCookie(request.headers);
   var token = getAuthHeader(request.headers);
-  console.log(JSON.stringify(event));
-  console.log(account)
-  console.log(token)
 
   var stagePath = "production";
   var host = request.headers.host[0].value;
   if (host.indexOf("staging") > -1) stagePath = "staging";
 
-  if (token.length > 0) {
-    var user = jwt.decode(token.replace("Bearer ", ""));
-  }
+  //  if (token.length > 0) {
+  //   var user = jwt.decode(token.replace("Bearer ", ""));
+  // }
 
   var isPublic = false;
   if (request.uri.indexOf("/api/public") == 0) isPublic = true;
@@ -40,8 +35,6 @@ exports.handler = async(event) => {
 
   //ie: /api/public/login/validateCode , /api/admin/account/all
   request.uri = "/" + stagePath + request.uri;
-
-  console.log(request);
 
   return request;
 
