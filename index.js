@@ -24,7 +24,7 @@ exports.handler = async(event) => {
 
   var stagePath = "production";
   var host = request.headers.host[0].value;
-  if (host.indexOf("staging") > -1) stage = "staging";
+  if (host.indexOf("staging") > -1) stagePath = "staging";
 
   if (token.length > 0) {
     var user = jwt.decode(token.replace("Bearer ", ""));
@@ -35,11 +35,13 @@ exports.handler = async(event) => {
   request.uri = request.uri.replace("api/", "");
 
   if (isPublic == false) {
-    request.uri = "/" + account + requestId;
+    request.uri = "/" + account + request.uri;
   }
 
   //ie: /api/public/login/validateCode , /api/admin/account/all
   request.uri = "/" + stagePath + request.uri;
+
+  console.log(request.uri);
 
   return request;
 
