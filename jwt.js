@@ -25,15 +25,7 @@ Jwt.encode = function(contact) {
 }
 
 Jwt.decode = function(token) {
-  var promise = function(resolve, reject) {
-    try {
-      resolve(JWT.decode(token, Jwt.secret));
-    } catch (e) {
-      reject()
-    }
-
-  }
-  return new Promise(promise);
+  JWT.decode(token, Jwt.secret));
 }
 
 module.exports = Jwt;

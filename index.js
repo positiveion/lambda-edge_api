@@ -21,8 +21,9 @@ exports.handler = async(event) => {
   console.log(account)
   console.log(token)
 
-  var user = jwt.decode(token.replace("Bearer ", ""));
-  console.log(user);
+  if (token.length > 0) {
+    var user = jwt.decode(token.replace("Bearer ", ""));
+  }
 
   request.uri = request.uri.replace("api/", "");
   return callback(null, request);
