@@ -25,7 +25,7 @@ Jwt.encode = function(contact) {
 }
 
 Jwt.decode = function(token) {
-  JWT.decode(token, Jwt.secret);
+  return JWT.decode(token, Jwt.secret);
 }
 
 module.exports = Jwt;
