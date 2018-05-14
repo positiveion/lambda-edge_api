@@ -1,7 +1,7 @@
 var JWT = require('jwt-simple');
 var Promise = require("bluebird");
 
-Jwt = {}
+var Jwt = {}
 Jwt.secret = Buffer.from('ae1a1981a419f3ri5377b64d14794932', 'hex');
 
 Jwt.encode = function(contact) {
@@ -25,7 +25,7 @@ Jwt.encode = function(contact) {
 }
 
 Jwt.decode = function(token) {
-  JWT.decode(token, Jwt.secret));
+  JWT.decode(token, Jwt.secret);
 }
 
 module.exports = Jwt;
