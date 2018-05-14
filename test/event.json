@@ -1,0 +1,75 @@
+{
+  "Records": [{
+    "cf": {
+      "config": {
+        "distributionDomainName": "d3lfujwunhilc8.cloudfront.net",
+        "distributionId": "EGGE83DLUIT7U",
+        "eventType": "viewer-request",
+        "requestId": "_DEMOdrwWysZUbdcu56si76cAG8Qc0Hzz88yKElGW_FVYYAaBp8jhg=="
+      },
+      "request": {
+        "body": "",
+        "bodyEncoding": "base64",
+        "bodyTruncated": false,
+        "clientIp": "190.151.134.250",
+        "headers": {
+          "accept": [{
+            "key": "accept",
+            "value": "*/*"
+          }],
+          "accept-encoding": [{
+            "key": "accept-encoding",
+            "value": "gzip, deflate, br"
+          }],
+          "accept-language": [{
+            "key": "accept-language",
+            "value": "en-US,en;q=0.9,es;q=0.8"
+          }],
+          "authorization": [{
+            "key": "authorization",
+            "value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJBQ0wiOiJ7fSIsInByb2ZpbGUiOiJwdWJsaWMiLCJlbWFpbCI6InJvYmVydG9Acm9kY29jci5jb20iLCJtb2JpbGVfcGhvbmUiOiIiLCJkZXRhaWxzIjoie30iLCJhY2NvdW50Ijp7Im5hbWUiOiJyb2RjbyJ9fQ.ItKtrruhEDC-bsFTmNJAR1CnH-BhvcpRntDUHuAXu3Q"
+          }],
+          "cache-control": [{
+            "key": "cache-control",
+            "value": "no-cache"
+          }],
+          "content-type": [{
+            "key": "content-type",
+            "value": "application/json"
+          }],
+          "cookie": [{
+            "key": "cookie",
+            "value": "account=rodco"
+          }],
+          "host": [{
+            "key": "Host",
+            "value": "stagingapp.positiveion.io"
+          }],
+          "pragma": [{
+            "key": "pragma",
+            "value": "no-cache"
+          }],
+          "referer": [{
+            "key": "referer",
+            "value": "https://stagingapp.positiveion.io/app.html"
+          }],
+          "user-agent": [{
+            "key": "User-Agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.170 Safari/537.36"
+          }],
+          "x-account": [{
+            "key": "x-account",
+            "value": "rodco"
+          }],
+          "x-namespace": [{
+            "key": "x-namespace",
+            "value": "staging"
+          }]
+        },
+        "method": "GET",
+        "querystring": "",
+        "uri": "/api/login/menu/all"
+      }
+    }
+  }]
+}
