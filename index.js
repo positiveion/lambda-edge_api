@@ -5,7 +5,6 @@ var path = require("path");
 var jwt = require("./jwt");
 
 const AWS = require('aws-sdk');
-var documentClient = new AWS.DynamoDB.DocumentClient();
 
 const S3 = new AWS.S3({
   signatureVersion: 'v4',
@@ -23,30 +22,29 @@ exports.handler = async(event) => {
   console.log(account)
   console.log(token)
 
+  var stagePath = "production";
+  var host = request.headers.host[0].value;
+  if (host.indexOf("staging") > -1) stage = "staging";
+
   if (token.length > 0) {
     var user = jwt.decode(token.replace("Bearer ", ""));
   }
 
-  return getAccount(account)
-    .then(function(fullAccount) {
-      console.log(fullAccount)
-      request.uri = request.uri.replace("api/", "");
-      return request;
-    })
+  var isPublic = false;
+  if (request.uri.indexOf("/api/public") == 0) isPublic = true;
+  request.uri = request.uri.replace("api/", "");
+
+  if (isPublic == false) {
+    request.uri = "/" + account + requestId;
+  }
+
+  //ie: /api/public/login/validateCode , /api/admin/account/all
+  request.uri = "/" + stagePath + request.uri;
+
+  return request;
 
 };
 
-function getAccount(account) {
-  var params = {
-    TableName: 'account',
-    Key: {
-      name: account
-    }
-  };
-
-
-  return documentClient.get(params)
-}
 
 function getAccountCookie(headers) {
   var cookie = headers.cookie || [];
