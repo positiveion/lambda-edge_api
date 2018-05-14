@@ -2,6 +2,7 @@
 const querystring = require('querystring');
 var url = require("url");
 var path = require("path");
+var jwt = require("./jwt");
 
 const AWS = require('aws-sdk');
 const S3 = new AWS.S3({
@@ -19,6 +20,9 @@ exports.handler = async(event) => {
   console.log(JSON.stringify(event));
   console.log(account)
   console.log(token)
+
+  var user = jwt.decode(token.replace("Bearer ", ""));
+  console.log(user);
 
   request.uri = request.uri.replace("api/", "");
   return callback(null, request);
