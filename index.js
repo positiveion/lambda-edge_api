@@ -26,7 +26,7 @@ exports.handler = async(event) => {
   }
 
   request.uri = request.uri.replace("api/", "");
-  request
+  return request
 
 };
 
