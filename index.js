@@ -5,6 +5,8 @@ var path = require("path");
 var jwt = require("./jwt");
 
 const AWS = require('aws-sdk');
+var documentClient = new AWS.DynamoDB.DocumentClient();
+
 const S3 = new AWS.S3({
   signatureVersion: 'v4',
 });
@@ -25,10 +27,26 @@ exports.handler = async(event) => {
     var user = jwt.decode(token.replace("Bearer ", ""));
   }
 
-  request.uri = request.uri.replace("api/", "");
-  return request
+  return getAccount(account)
+    .then(function(fullAccount) {
+      console.log(fullAccount)
+      request.uri = request.uri.replace("api/", "");
+      return request;
+    })
 
 };
+
+function getAccount(account) {
+  var params = {
+    TableName: 'account',
+    Key: {
+      name: account
+    }
+  };
+
+
+  return documentClient.get(params)
+}
 
 function getAccountCookie(headers) {
   var cookie = headers.cookie || [];
