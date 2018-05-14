@@ -2,14 +2,14 @@
 const querystring = require('querystring');
 var url = require("url");
 var path = require("path");
-var DynamoDB = require('@awspilot/dynamodb')();
+
 
 const AWS = require('aws-sdk');
 const S3 = new AWS.S3({
   signatureVersion: 'v4',
 });
 
-var Promise = require("bluebird");
+
 
 function App(event) => {
   console.log(JSON.stringify(event));

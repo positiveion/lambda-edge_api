@@ -11,8 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "chai": "^4.1.2",
-    "@awspilot/dynamodb": "^1.0.9",
-    "jwt-simple": "^0.5.1"
+
+  "jwt-simple": "^0.5.1"
   },
   "devDependencies": {
     "aws-sdk": "^2.169.0",
