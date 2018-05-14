@@ -41,7 +41,7 @@ exports.handler = async(event) => {
   //ie: /api/public/login/validateCode , /api/admin/account/all
   request.uri = "/" + stagePath + request.uri;
 
-  console.log(request.uri);
+  console.log(request);
 
   return request;
 
