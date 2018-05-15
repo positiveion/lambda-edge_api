@@ -13,10 +13,13 @@ const S3 = new AWS.S3({
 exports.handler = async(event) => {
 
   const request = event.Records[0].cf.request;
+
+  console.log(JSON.stringify(request));
+
   var normalHeaders = normalize(request.headers);
 
   var token = normalHeaders.authorization;
-  delete normalHeaders.authorization;
+  //delete normalHeaders.authorization;
 
   var stagePath = "production";
   var namespace = normalHeaders["x-namespace"] || "production";
@@ -40,9 +43,11 @@ exports.handler = async(event) => {
   }
 
   request.headers = denormalize(normalHeaders)
-    //ie: /api/public/login/validateCode , /api/admin/account/all
+
+  //ie: /api/public/login/validateCode , /api/admin/account/all
   request.uri = "/" + stagePath + request.uri;
 
+  console.log(JSON.stringify(request));
   return request;
 
 };
