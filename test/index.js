@@ -22,7 +22,7 @@ describe('Operation test', () => {
     Handler(Event2)
       .then(function(res) {
         console.log(res);
-        res.headers["x-token"][0].value = "staging";
+        res.headers["authorization"].should.not.equal(null)
         res.headers["x-namespace"].should.not.equal(null)
         done();
       })
