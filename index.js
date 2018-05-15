@@ -21,15 +21,13 @@ exports.handler = async(event) => {
   var host = request.headers.host[0].value;
   if (host.indexOf("staging") > -1) stagePath = "staging";
 
-  //  if (token.length > 0) {
-  //   var user = jwt.decode(token.replace("Bearer ", ""));
-  // }
-
   var isPublic = false;
   if (request.uri.indexOf("/api/public") == 0) isPublic = true;
   request.uri = request.uri.replace("api/", "");
 
   if (isPublic == false) {
+    var user = jwt.decode(token.replace("Bearer ", ""));
+    var account = user.account.name;
     request.uri = "/" + account + request.uri;
   }
 
@@ -51,7 +49,7 @@ function getAccountCookie(headers) {
 }
 
 function getAuthHeader(headers) {
-  var authorization = headers.authorization || [];
+  var authorization = headers["x-token"] || [];
   var token = "";
   authorization.forEach(function(c) {
     token = c.value;
