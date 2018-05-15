@@ -13,13 +13,20 @@ const S3 = new AWS.S3({
 exports.handler = async(event) => {
 
   const request = event.Records[0].cf.request;
+  var normalHeaders = normalize(request.headers);
 
-  var account = getAccountCookie(request.headers);
-  var token = getAuthHeader(request.headers);
+  var token = normalHeaders.authorization;
+  delete normalHeaders.authorization;
 
   var stagePath = "production";
+  var namespace = normalHeaders["x-namespace"] || "production";
+
   var host = request.headers.host[0].value;
-  if (host.indexOf("staging") > -1) stagePath = "staging";
+  if (host.indexOf("staging") > -1) {
+    namespace = normalHeaders["x-namespace"] || "staging";
+    stagePath = "staging";
+  }
+  normalHeaders["x-namespace"] = namespace;
 
   var isPublic = false;
   if (request.uri.indexOf("/api/public") == 0) isPublic = true;
@@ -29,9 +36,11 @@ exports.handler = async(event) => {
     var user = jwt.decode(token.replace("Bearer ", ""));
     var account = user.account.name;
     request.uri = "/" + account + request.uri;
+    normalHeaders["x-token"] = token;
   }
 
-  //ie: /api/public/login/validateCode , /api/admin/account/all
+  request.headers = denormalize(normalHeaders)
+    //ie: /api/public/login/validateCode , /api/admin/account/all
   request.uri = "/" + stagePath + request.uri;
 
   return request;
@@ -39,20 +48,25 @@ exports.handler = async(event) => {
 };
 
 
-function getAccountCookie(headers) {
-  var cookie = headers.cookie || [];
-  var account = "";
-  cookie.forEach(function(c) {
-    if (c.value.indexOf("account=") == 0) account = c.value.replace("account=", "");
+function normalize(headers) {
+  var keys = Object.keys(headers);
+  var result = {}
+  keys.forEach(function(key) {
+    key = key.toLowerCase();
+    result[key] = headers[key][0].value;
   })
-  return account;
+  return result;
 }
 
-function getAuthHeader(headers) {
-  var authorization = headers["x-token"] || [];
-  var token = "";
-  authorization.forEach(function(c) {
-    token = c.value;
+function denormalize(headers) {
+  var keys = Object.keys(headers);
+  var result = {}
+  keys.forEach(function(key) {
+    key = key.toLowerCase();
+    result[key] = [{
+      key: key,
+      value: headers[key]
+    }]
   })
-  return token;
+  return result;
 }

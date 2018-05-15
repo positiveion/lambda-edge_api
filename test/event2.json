@@ -56,15 +56,11 @@
           "user-agent": [{
             "key": "User-Agent",
             "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.170 Safari/537.36"
-          }],
-          "x-namespace": [{
-            "key": "x-namespace",
-            "value": "other"
           }]
         },
         "method": "GET",
         "querystring": "",
-        "uri": "/api/public/login/menu/all"
+        "uri": "/api/login/menu/all"
       }
     }
   }]
