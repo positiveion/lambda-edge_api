@@ -39,7 +39,7 @@ exports.handler = async(event) => {
     var user = jwt.decode(token.replace("Bearer ", ""));
     var account = user.account.name;
     request.uri = "/" + account + request.uri;
-    normalHeaders["x-token"] = token;
+    //normalHeaders["x-token"] = token;
   }
 
   request.headers = denormalize(normalHeaders)
