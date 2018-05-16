@@ -12,14 +12,13 @@ const S3 = new AWS.S3({
 
 exports.handler = async(event) => {
 
-
   const request = event.Records[0].cf.request;
 
   console.log(JSON.stringify(request));
 
   var normalHeaders = normalize(request.headers);
 
-  var token = normalHeaders.authorization || normalHeaders["x-token"];
+  var token = normalHeaders.authorization;
   //delete normalHeaders.authorization;
 
   var stagePath = "production";
@@ -37,6 +36,21 @@ exports.handler = async(event) => {
   request.uri = request.uri.replace("api/", "");
 
   if (isPublic == false) {
+    if (!token) return {
+      status: '401',
+      statusDescription: 'unauthorized',
+      headers: {
+        'content-type': [{
+          key: 'Content-Type',
+          value: 'text/html'
+        }],
+        'content-encoding': [{
+          key: 'Content-Encoding',
+          value: 'UTF-8'
+        }],
+      },
+      body: "",
+    };
     var user = jwt.decode(token.replace("Bearer ", ""));
     var account = user.account.name;
     request.uri = "/" + account + request.uri;
