@@ -12,13 +12,14 @@ const S3 = new AWS.S3({
 
 exports.handler = async(event) => {
 
+
   const request = event.Records[0].cf.request;
 
   console.log(JSON.stringify(request));
 
   var normalHeaders = normalize(request.headers);
 
-  var token = normalHeaders.authorization;
+  var token = normalHeaders.authorization || normalHeaders["x-token"];
   //delete normalHeaders.authorization;
 
   var stagePath = "production";
