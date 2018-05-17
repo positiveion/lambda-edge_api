@@ -42,7 +42,7 @@ exports.handler = async(event) => {
       headers: {
         'content-type': [{
           key: 'Content-Type',
-          value: 'text/html'
+          value: 'applicacion/json'
         }],
         'content-encoding': [{
           key: 'Content-Encoding',
