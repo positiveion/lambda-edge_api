@@ -18,7 +18,7 @@ exports.handler = async(event) => {
 
   var normalHeaders = normalize(request.headers);
 
-  var token = normalHeaders.authorization;
+  var token = normalHeaders.authorization || normalHeaders["x-token"];
   //delete normalHeaders.authorization;
 
   var stagePath = "production";
@@ -49,7 +49,7 @@ exports.handler = async(event) => {
           value: 'UTF-8'
         }],
       },
-      body: "",
+      body: '{"error": "Token not found for non-public route"}',
     };
     var user = jwt.decode(token.replace("Bearer ", ""));
     var account = user.account.name;
